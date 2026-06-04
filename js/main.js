@@ -238,6 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
   initSmoothScroll();
   initGlobalParticles();
+  initFloatingPhone();
 });
 
 // ─── Language System ──────────────────────────────────────────────
@@ -283,6 +284,18 @@ function applyTranslations(t) {
       el.textContent = t[key];
     }
   });
+
+  // Switch nav phone number based on language
+  const phoneData = {
+    vi: { number: '0813 06 06 06', href: 'tel:+84813060606' },
+    en: { number: '0475 383 333', href: 'tel:+61475383333' }
+  };
+  const navPhone = document.getElementById('navPhone');
+  const navPhoneNumber = document.getElementById('navPhoneNumber');
+  if (navPhone && navPhoneNumber && phoneData[currentLang]) {
+    navPhoneNumber.textContent = phoneData[currentLang].number;
+    navPhone.href = phoneData[currentLang].href;
+  }
 }
 
 // ─── Navbar Scroll ────────────────────────────────────────────────
@@ -414,6 +427,25 @@ function initBackToTop() {
 
   btn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+// ─── Floating Phone ───────────────────────────────────────────────
+function initFloatingPhone() {
+  const wrapper = document.getElementById('floatingPhone');
+  const btn = document.getElementById('floatingPhoneBtn');
+  if (!wrapper || !btn) return;
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    wrapper.classList.toggle('open');
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!wrapper.contains(e.target)) {
+      wrapper.classList.remove('open');
+    }
   });
 }
 

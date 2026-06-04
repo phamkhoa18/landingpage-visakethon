@@ -1702,8 +1702,63 @@ button {
 
 /* Ensure navbar and interactive elements stay above particles */
 .navbar { z-index: 1000; }
-.back-to-top { z-index: 100; }
 .mobile-menu { z-index: 999; }
+
+/* ============================================
+   NAV PHONE LINK
+   ============================================ */
+.nav-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: var(--gradient-cta);
+  color: var(--white);
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: all var(--transition-base);
+  position: relative;
+  box-shadow: 0 4px 16px rgba(196, 84, 122, 0.3);
+}
+
+.nav-phone::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-cta);
+  opacity: 0;
+  animation: navPhonePulse 2.5s ease-in-out infinite;
+  z-index: -1;
+}
+
+.nav-phone:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(196, 84, 122, 0.45);
+  color: var(--white);
+}
+
+.nav-phone .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.nav-phone-number {
+  font-family: var(--font-body);
+}
+
+@keyframes navPhonePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.35;
+  }
+}
 
 /* ============================================
    SCROLL REVEAL ANIMATIONS
@@ -1829,9 +1884,9 @@ button {
     height: 36px;
   }
 
-  .lang-btn {
-    padding: 4px 10px;
-    font-size: 0.75rem;
+  /* Hide lang toggle on mobile — already in mobile menu */
+  .nav-right > .lang-toggle {
+    display: none;
   }
 
   .nav-mobile-btn {
@@ -1841,6 +1896,20 @@ button {
 
   .nav-mobile-btn .material-symbols-outlined {
     font-size: 24px;
+  }
+
+  .nav-phone {
+    padding: 7px 16px;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 12px rgba(196, 84, 122, 0.35);
+  }
+
+  .nav-phone .material-symbols-outlined {
+    font-size: 16px;
+  }
+
+  .nav-phone-number {
+    font-size: 0.85rem;
   }
 
   /* Hero */
